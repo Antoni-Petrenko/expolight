@@ -14,22 +14,22 @@ window.addEventListener("load", (e) => {
     // e.target.classList.remove("visible");
     e.target.style.transform = `translateX(${change * -1}px)`;
     // e.target.nextElementSibling.classList.add("visible");
-    e.preventDefault();
+    // e.preventDefault();
   };
   const handleEndTouch = (e) => {
     e.target.style.transition = "transform 0.3s linear";
     const change = startX - e.changedTouches[0].clientX;
     const half = screen.width / 3;
-
     if (change < half) {
         e.target.style.transform = `translate(0)`;
     } else {
         e.target.style.transform = `translate(-100%)`;
+        if(!e.target.nextElementSibling){
+            const audio=new Audio('./publik/assets/sound.mp3');
+            audio.play();
+        }
     }
-    if(!e.target.nextElementSibling){
-        const audio=new Audio('./publik/assets/sound.mp3');
-        audio.play();
-    }
+   
   };
 
   pages.forEach((page) => {

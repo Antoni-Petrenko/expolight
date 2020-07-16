@@ -25,8 +25,7 @@ window.addEventListener("load", (e) => {
     } else {
         e.target.style.transform = `translate(-100%)`;
         if(!e.target.nextElementSibling){
-            const audio=new Audio('./publik/assets/sound.mp3');
-            audio.play();
+           
         }
     }
    

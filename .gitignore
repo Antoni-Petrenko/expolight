@@ -1,2 +1,7 @@
 /brand_book
 /dev-asset
+/node_modules
+/react
+.babelrc
+package.json
+package-lock.json

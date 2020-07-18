@@ -1,47 +1,57 @@
-window.addEventListener("load", e => {
+window.addEventListener("load", (e) => {
   const pages = [...document.querySelectorAll(".page")];
 
-  const handleStartTouch = e => {
-    alert(e.target.classList)
-    e.target.style.transition = "transform 0.1s linear";
+  const handleStartTouch = (e) => {
     startX = e.touches[0].clientX;
   };
 
-  const handleMoveTouch = e => {
-    const touch = e.touches[0];
-    const change = startX - touch.clientX;
+  // const handleMoveTouch = (e) => {
+  //   const touch = e.touches[0];
+  //   const change = startX - touch.clientX;
 
-    if (change < 0) {
-      return;
-    }
-    e.target.style.transform = `translateX(${change * -1}px)`; 
-  };
+  //   if (change < 0) {
+  //     return;
+  //   }
+  //   e.target.style.transform = `translateX(${change * -1}px)`;
+  // };
 
-  const handleEndTouch = e => {
-    e.target.style.transition = "transform 0.3s linear";
+  const handleEndTouch = (e) => {
     const change = startX - e.changedTouches[0].clientX;
+    const direction = change < 0 ? "right" : "left";
     const half = screen.width / 3;
+    const visiblePage=e.target;
 
-    if (change < half) {
-      e.target.style.transform = `translate(0)`;
-    } else {
-      e.target.style.transform = `translate(-100%)`;
-
-      if (!e.target.nextElementSibling) {}
+    switch (direction) {
+      case "right":
+        if (Math.abs(change) > half && visiblePage.previousElementSibling) {
+          //to the right
+          pages.forEach(page=>page.classList.remove("active"))
+          visiblePage.previousElementSibling.classList.add("active");
+          return
+        }
+      case "left":
+        if (Math.abs(change) > half && visiblePage.nextElementSibling) {
+          //to the left
+          pages.forEach(page=>page.classList.remove("active"))
+          visiblePage.nextElementSibling.classList.add("active");
+          return
+        }
     }
   };
 
-  pages.forEach(page => {
+  pages.forEach((page) => {
     let startX;
     page.addEventListener("touchstart", handleStartTouch, false);
     page.addEventListener("touchend", handleEndTouch, false);
-    page.addEventListener("touchmove", handleMoveTouch, false);
+    // page.addEventListener("touchmove", handleMoveTouch, false);
   });
-  full_screen_submit.addEventListener("click", async e => {
+
+  full_screen_submit.addEventListener("click", async (e) => {
     try {
       document.querySelector("body").requestFullscreen();
       document.querySelector(".modal__container").classList.remove("active");
       document.querySelector(".loader").classList.add("play");
+
     } catch (err) {
       console.log(err);
     }
@@ -49,5 +59,8 @@ window.addEventListener("load", e => {
   full_screen_cancel.addEventListener("click", () => {
     document.querySelector(".modal__container").classList.remove("active");
     document.querySelector(".loader").classList.add("play");
+    document.querySelector(".loader").addEventListener("animationend",()=>{
+      pages[0].classList.add("active");
+    })
   });
 });

@@ -1,9 +1,7 @@
 window.addEventListener("load", (e) => {
   const pages = [...document.querySelectorAll(".page")];
 
-  const handleStartTouch = (e) => {
-    startX = e.touches[0].clientX;
-  };
+  const handleStartTouch = (e) => (startX = e.touches[0].clientX);
 
   // const handleMoveTouch = (e) => {
   //   const touch = e.touches[0];
@@ -19,23 +17,33 @@ window.addEventListener("load", (e) => {
     const change = startX - e.changedTouches[0].clientX;
     const direction = change < 0 ? "right" : "left";
     const half = screen.width / 3;
-    const visiblePage=e.target;
-
+    const visiblePage = e.target;
     switch (direction) {
       case "right":
         if (Math.abs(change) > half && visiblePage.previousElementSibling) {
           //to the right
-          pages.forEach(page=>page.classList.remove("active"))
-          visiblePage.previousElementSibling.classList.add("active");
-          return
+          pages.forEach((page) => page.classList.remove("active"));
+          visiblePage.addEventListener("transitionend",()=>{
+            visiblePage.previousElementSibling.classList.add("active");
+          },{
+            once: true
+          })
+         
         }
+        break;
       case "left":
         if (Math.abs(change) > half && visiblePage.nextElementSibling) {
           //to the left
-          pages.forEach(page=>page.classList.remove("active"))
-          visiblePage.nextElementSibling.classList.add("active");
-          return
+          pages.forEach((page) => page.classList.remove("active"));
+          visiblePage.addEventListener("transitionend",()=>{
+            visiblePage.nextElementSibling.classList.add("active");
+          },{
+            once:true
+          })
         }
+        break;
+        default:
+          break
     }
   };
 
@@ -51,7 +59,6 @@ window.addEventListener("load", (e) => {
       document.querySelector("body").requestFullscreen();
       document.querySelector(".modal__container").classList.remove("active");
       document.querySelector(".loader").classList.add("play");
-
     } catch (err) {
       console.log(err);
     }
@@ -59,8 +66,8 @@ window.addEventListener("load", (e) => {
   full_screen_cancel.addEventListener("click", () => {
     document.querySelector(".modal__container").classList.remove("active");
     document.querySelector(".loader").classList.add("play");
-    document.querySelector(".loader").addEventListener("animationend",()=>{
+    document.querySelector(".loader").addEventListener("animationend", () => {
       pages[0].classList.add("active");
-    })
+    });
   });
 });

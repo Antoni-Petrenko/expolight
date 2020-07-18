@@ -13,44 +13,58 @@ window.addEventListener("load", (e) => {
   //   e.target.style.transform = `translateX(${change * -1}px)`;
   // };
 
-  const handleEndTouch = (e) => {
-    const change = startX - e.changedTouches[0].clientX;
-    const direction = change < 0 ? "right" : "left";
-    const half = screen.width / 3;
-    const visiblePage = e.target;
-    switch (direction) {
-      case "right":
-        if (Math.abs(change) > half && visiblePage.previousElementSibling) {
-          //to the right
-          pages.forEach((page) => page.classList.remove("active"));
-          visiblePage.addEventListener("transitionend",()=>{
-            visiblePage.previousElementSibling.classList.add("active");
-          },{
-            once: true
-          })
-         
+  const handleEndTouch = (limit) => {
+    let inThrottle;
+    return (e) => {
+      if (!inThrottle) {
+        inThrottle = true;
+        const change = startX - e.changedTouches[0].clientX;
+        const direction = change < 0 ? "right" : "left";
+        const half = screen.width / 3;
+        const visiblePage = e.target;
+        switch (direction) {
+          case "right":
+            if (Math.abs(change) > half && visiblePage.previousElementSibling) {
+              //to the right
+              pages.forEach((page) => page.classList.remove("active"));
+              visiblePage.addEventListener(
+                "transitionend",
+                () => {
+                  visiblePage.previousElementSibling.classList.add("active");
+                },
+                {
+                  once: true,
+                }
+              );
+            }
+            break;
+          case "left":
+            if (Math.abs(change) > half && visiblePage.nextElementSibling) {
+              //to the left
+              pages.forEach((page) => page.classList.remove("active"));
+              visiblePage.addEventListener(
+                "transitionend",
+                () => {
+                  visiblePage.nextElementSibling.classList.add("active");
+                },
+                {
+                  once: true,
+                }
+              );
+            }
+            break;
+          default:
+            break;
         }
-        break;
-      case "left":
-        if (Math.abs(change) > half && visiblePage.nextElementSibling) {
-          //to the left
-          pages.forEach((page) => page.classList.remove("active"));
-          visiblePage.addEventListener("transitionend",()=>{
-            visiblePage.nextElementSibling.classList.add("active");
-          },{
-            once:true
-          })
-        }
-        break;
-        default:
-          break
-    }
+        setTimeout(() => (inThrottle = false), limit);
+      }
+    };
   };
 
   pages.forEach((page) => {
     let startX;
     page.addEventListener("touchstart", handleStartTouch, false);
-    page.addEventListener("touchend", handleEndTouch, false);
+    page.addEventListener("touchend", handleEndTouch(1000), false);
     // page.addEventListener("touchmove", handleMoveTouch, false);
   });
 
@@ -59,6 +73,9 @@ window.addEventListener("load", (e) => {
       document.querySelector("body").requestFullscreen();
       document.querySelector(".modal__container").classList.remove("active");
       document.querySelector(".loader").classList.add("play");
+      document.querySelector(".loader").addEventListener("animationend", () => {
+        pages[0].classList.add("active");
+      });
     } catch (err) {
       console.log(err);
     }

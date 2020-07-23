@@ -2,7 +2,44 @@ window.addEventListener("load", (e) => {
   const pages = [...document.querySelectorAll(".page")];
   const madal = document.querySelector(".modal__container");
   const loader = document.querySelector(".loader");
+  const start=document.getElementById("app-start");
+  let isFullscreen;
 
+  const startHandler=(e)=>{
+    e.preventDefault();
+    pages[2].addEventListener("transitionend",()=>{
+      document.querySelector("main").style.display="none";
+      app.classList.add("active");
+      app.classList.toggle("load");
+      setTimeout(()=>{
+        madal.querySelector(".modal__content__info").textContent=`Ця можливість доступна з:
+        адреса 1,
+        адреса 2`;
+        madal.classList.add("active");
+        app.classList.toggle("load");
+       
+      },2000)
+    }, {
+      once: true,
+    });
+    pages[2].classList.add("exit");
+    const select=document.querySelector("#select");
+    select.querySelectorAll("li").forEach((li, i,list)=>{
+      li.addEventListener("click",(e)=>{
+        list.forEach(li=>li.classList.remove("active"))
+        e.target.classList.add("active")
+        const listOfAnim=document.querySelector(".app-selected");
+
+        listOfAnim.querySelectorAll(".anim-selected").forEach(el=>el.classList.remove("active"));
+
+        listOfAnim.querySelector(`[data-anim='${e.target.dataset.anim}'`).classList.add("active"); 
+        
+      
+
+      })
+    })
+    
+  }
   const handleButton = (visiblePage, e) => {
     visiblePage.classList.toggle("active");
     visiblePage.addEventListener(
@@ -101,13 +138,17 @@ window.addEventListener("load", (e) => {
     page.addEventListener("touchstart", handleStartTouch, false);
     page.addEventListener("touchend", handleEndTouch(1000), false);
     page
-      .querySelector("button")
+      .querySelector(".card__controll--next")
       .addEventListener("click", handleButton.bind(null, page), false);
   });
+  start.addEventListener("click",startHandler);
 
   full_screen_submit.addEventListener("click", async (e) => {
     try {
-      document.querySelector("body").requestFullscreen();
+      if(!isFullscreen){
+        isFullscreen=true;
+        document.querySelector("body").requestFullscreen();
+      }
       madal.classList.remove("active");
       loader.classList.add("play");
       loader.addEventListener("animationend", () => {
@@ -118,6 +159,7 @@ window.addEventListener("load", (e) => {
     }
   });
   full_screen_cancel.addEventListener("click", () => {
+    isFullscreen=true;
     madal.classList.remove("active");
     loader.classList.add("play");
     loader.addEventListener("animationend", () => {

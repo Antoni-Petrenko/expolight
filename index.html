@@ -19,8 +19,8 @@
     <div class="modal__container active">
       <div class="modal__content">
         <p class="modal__content__info">Відкрити на весь екран?</p>
-        <button id="full_screen_submit">Так</button>
-        <button id="full_screen_cancel">Ні</button>
+        <button class="button" id="full_screen_submit">Так</button>
+        <button class="button" id="full_screen_cancel">Ні</button>
       </div>
     </div>
 
@@ -160,8 +160,7 @@
           </g>
         </svg>
       </div>
-
-      <div id="app">
+      <main>
         <section class="page page_1">
           <div class="card">
             <div class="card__media-container">
@@ -179,7 +178,9 @@
                 Assumenda cumque sint minima! Non quae ab aliquid unde laborum
               </p>
             </div>
-            <button>Далі</button>
+            <div class="card__controll">
+              <button class="card__controll--next">Далі</button>
+            </div>
           </div>
         </section>
         <section class="page page_2">
@@ -198,7 +199,9 @@
                 Assumenda cumque sint minima! Non quae ab aliquid unde laborum
               </p>
             </div>
-            <button>Далі</button>
+            <div class="card__controll">
+              <button class="card__controll--next">Далі</button>
+            </div>
           </div>
         </section>
         <section class="page page_3">
@@ -214,7 +217,19 @@
                 На жаль, ваш веб-переглядач не підтримує вбудовані відео
               </video>
             </div>
-            <button>Далі</button>
+            <div class="card__content">
+              <h3>Благотворительный</h3>
+              <p>
+                Блок о возможности сделать донейт и “купить” себе фейерверк
+                “Запусти лазерний салют/фейєрверк
+              </p>
+              <a href="#" id="app-start" class="card__content__switch"
+                >Подаруй промінь надії</a
+              >
+            </div>
+            <div class="card__controll">
+              <button class="card__controll--next">Далі</button>
+            </div>
           </div>
         </section>
         <section class="page page_4">
@@ -230,12 +245,139 @@
                 Sorry, your browser doesn't support embedded videos
               </video>
             </div>
-            <button>Далі</button>
+            <div class="card__controll">
+              <button class="card__controll--next">Детальніше про фонд</button>
+            </div>
           </div>
         </section>
-        <section class="page page_5">
-          <button>Далі</button>
-        </section>
+      </main>
+      <div id="app">
+        <!-- <nav></nav> -->
+        <div class="app-loader">
+          <img src="./publik/images/puff.svg" />
+        </div>
+        <div class="app-content">
+          <h3>Анімації</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
+            minus cum quae 
+          </p>
+        </div>
+        <div class="app-select">
+          <div id="select" class="container">
+            <ul>
+              <li data-anim="1">100 uah</li>
+              <li data-anim="2">200 uah</li>
+              <li data-anim="3">300 uah</li>
+            </ul>
+          </div>
+        </div>
+        <div class="app-selected">
+          <div class="anim-selected" data-anim="1">
+            <div class="border">
+              <div class="inside">
+                <video
+                class="card__bg card__bg-3"
+                src="./publik/video/third.mp4"
+                preload="auto"
+                loop="true"
+                muted="muted"
+                autoplay
+              >
+                На жаль, ваш веб-переглядач не підтримує вбудовані відео
+              </video>
+                <h3 style="color: white;">hello</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam cumque voluptas natus maiores tempora distinctio, accusamus tenetur doloremque, harum rerum aut reiciendis perferendis, quasi deserunt fuga quia vitae! Corporis, voluptate.</p>
+              </div>
+            </div>
+            <div class="border">
+              <div class="inside">
+                <video
+                class="card__bg card__bg-3"
+                src="./publik/video/fought.mp4"
+                autoplay
+                preload="auto"
+                loop="true"
+                muted="muted"
+                autoplay
+              >
+                На жаль, ваш веб-переглядач не підтримує вбудовані відео
+              </video>
+                <h3 style="color: white;">hello</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam cumque voluptas natus maiores tempora distinctio, accusamus tenetur doloremque, harum rerum aut reiciendis perferendis, quasi deserunt fuga quia vitae! Corporis, voluptate.</p>
+              </div>
+            </div>
+            <div class="border">
+              <div class="inside">
+                <video
+                class="card__bg card__bg-3"
+                src="./publik/video/third.mp4"
+                preload="auto"
+                loop="true"
+                muted="muted"
+                autoplay
+              >
+                На жаль, ваш веб-переглядач не підтримує вбудовані відео
+              </video>
+                <h3 style="color: white;">hello</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam cumque voluptas natus maiores tempora distinctio, accusamus tenetur doloremque, harum rerum aut reiciendis perferendis, quasi deserunt fuga quia vitae! Corporis, voluptate.</p>
+              </div>
+            </div>
+          </div>
+          <div class="anim-selected" data-anim="2">
+            <div class="border">
+              <div class="inside">
+                <video
+                class="card__bg card__bg-3"
+                src="./publik/video/fought.mp4"
+                preload="auto"
+                loop="true"
+                muted="muted"
+                autoplay
+              >
+                На жаль, ваш веб-переглядач не підтримує вбудовані відео
+              </video>
+                <h3 style="color: white;">hello</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam cumque voluptas natus maiores tempora distinctio, accusamus tenetur doloremque, harum rerum aut reiciendis perferendis, quasi deserunt fuga quia vitae! Corporis, voluptate.</p>
+              </div>
+            </div>
+            <div class="border">
+              <div class="inside">
+                <video
+                class="card__bg card__bg-3"
+                src="./publik/video/third.mp4"
+                preload="auto"
+                loop="true"
+                muted="muted"
+                autoplay
+              >
+                На жаль, ваш веб-переглядач не підтримує вбудовані відео
+              </video>
+                <h3 style="color: white;">hello</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam cumque voluptas natus maiores tempora distinctio, accusamus tenetur doloremque, harum rerum aut reiciendis perferendis, quasi deserunt fuga quia vitae! Corporis, voluptate.</p>
+              </div>
+            </div>
+          </div>
+          <div class="anim-selected" data-anim="3">
+            <div class="border">
+              <div class="inside">
+                <video
+                class="card__bg card__bg-3"
+                src="./publik/video/third.mp4"
+                preload="auto"
+                loop="true"
+                muted="muted"
+                autoplay
+              >
+                На жаль, ваш веб-переглядач не підтримує вбудовані відео
+              </video>
+                <h3 style="color: white;">hello</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam cumque voluptas natus maiores tempora distinctio, accusamus tenetur doloremque, harum rerum aut reiciendis perferendis, quasi deserunt fuga quia vitae! Corporis, voluptate.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
       </div>
     </div>
     <script src="./publik/assets/js/index.js"></script>

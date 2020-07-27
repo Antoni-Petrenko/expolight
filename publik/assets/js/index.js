@@ -236,13 +236,15 @@ window.addEventListener("DOMContentLoaded", (e) => {
           easing: "easeInOutSine",
           duration: 1500,
           direction: "alternate",
+          complete: function(anim) {
+            pages[0].classList.add("active");
+            document.querySelector(".loader.play").style.display="none"
+          }
         });
       }
       madal.classList.remove("active");
       loader.classList.add("play");
-      loader.addEventListener("animationend", () => {
-        pages[0].classList.add("active");
-      });
+      
     } catch (err) {
       console.log(err);
     }
@@ -256,6 +258,10 @@ window.addEventListener("DOMContentLoaded", (e) => {
       easing: "easeInOutSine",
       duration: 1500,
       direction: "alternate",
+      complete: function(anim) {
+        pages[0].classList.add("active");
+        document.querySelector(".loader.play").style.display="none"
+      }
     });
     anime({
       targets: " .X_yello",
@@ -267,9 +273,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
     madal.classList.remove("active");
     loader.classList.add("play");
-    loader.addEventListener("animationend", () => {
-      pages[0].classList.add("active");
-    });
+    
   });
 });
 
@@ -432,7 +436,7 @@ Dial.prototype.animateRversStart = function () {
       clearInterval(intervalOne);
       self.audio.play();
       window.navigator.vibrate(1500);
-      
+
     }
     self.setValue(v);
   }, 100);

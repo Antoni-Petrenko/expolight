@@ -31,7 +31,12 @@ window.addEventListener("DOMContentLoaded", (e) => {
     pages[2].classList.add("exit");
     const select = document.querySelector("#select");
     const listOfAnim = document.querySelector(".app-selected");
-
+      document.querySelector(".credit-card").addEventListener("click",function(e){
+        if(e.target !== this){
+          this.classList.toggle("rotate")
+        }
+        
+      })
     document
       .querySelector(".modal-credit-card")
       .addEventListener("click", function (e) {
@@ -68,7 +73,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
         document.querySelector(".modal-credit-card").classList.remove("active");
         app.classList.remove("active");
         app.classList.add("accept");
-        document.querySelector("circle").addEventListener("click", () => {
+        document.querySelector("text").addEventListener("click", () => {
           dial.animateStart();
         });
       }, 1000);
@@ -231,7 +236,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
         isFullscreen = true;
         await document.querySelector("body").requestFullscreen();
         anime({
-          targets: ".logo_letter , .description_letter, .X_yello, .X_white",
+          targets: ".logo_letter , .description_letter,.X_yello, .X_white",
           strokeDashoffset: [0],
           easing: "easeInOutSine",
           duration: 1500,
